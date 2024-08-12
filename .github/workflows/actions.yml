@@ -1,0 +1,50 @@
+name: Splunk Packaging
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install splunk-packaging-toolkit-1.0.1.tar.gz
+
+    - name: Validate Opsgenie Alert Action
+      run: slim validate opsgenie_alert_action
+
+    - name: Package Opsgenie Alert Action
+      run: slim package opsgenie_alert_action
+
+    - name: Get package name
+      id: get-package-name
+      run: |
+        PACKAGE_NAME=$(ls opsgenie_alert_action-*.tar.gz)
+        echo "PACKAGE_NAME=${PACKAGE_NAME}" >> $GITHUB_ENV
+
+    - name: Commit packaged file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ${{ env.PACKAGE_NAME }}
+        git diff-index --quiet HEAD || (git commit -a -m "updated packaged file ${{ env.PACKAGE_NAME }}" --allow-empty)
+
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
