@@ -107,7 +107,7 @@ def main():
         "note": note,
         "source": source,
         "details": details,
-        "entity": "Splunk SIEM",
+        "entity": "Splunk",
         "responders": responders
     }
 
