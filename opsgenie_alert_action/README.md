@@ -1,1 +1,1 @@
-opsgenie_alert_action.
+opsgenie_alert_action..
