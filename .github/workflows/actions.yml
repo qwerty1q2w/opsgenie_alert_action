@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'opsgenie_alert_action/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'opsgenie_alert_action/**'
 
 jobs:
   build:
