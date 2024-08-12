@@ -1,0 +1,75 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_message">Message</label>
+        <div class="controls">
+            <textarea name="action.opsgenie_alert_action.param.message" id="opsgenie_message" style="height: 140px;"></textarea>
+            <span class="help-block">Message that will be sent to Opsgenie. (Use <i>$result.FIELD_NAME$</i> to send field values.)</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_priority">Priority</label>
+        <div class="controls">
+            <select name="action.opsgenie_alert_action.param.priority" id="opsgenie_priority">
+                <option value="P1">P1 Critical</option>
+                <option value="P2">P2 High</option>
+                <option value="P3">P3 Moderate</option>
+                <option value="P4">P4 Low</option>
+                <option value="P5">P5 Informational</option>
+            </select>
+            <span class="help-block">Priority of the alert</span>
+        </div>
+    </div>
+     <div class="control-group">
+        <label class="control-label" for="opsgenie_responders">Responders</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.responders" id="opsgenie_responers" placeholder="team:name:teamname,user:username:email" />
+            <span class="help-block">Comma-separated list of responders</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_actions">Actions</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.actions" id="opsgenie_actions" placeholder="action1,action2" />
+            <span class="help-block">Comma-separated list of actions</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_tags">Tags</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.tags" id="opsgenie_tags" placeholder="tag1,tag2" />
+            <span class="help-block">Comma-separated list of tags</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_note">Note</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.note" id="opsgenie_note" placeholder="" />
+            <span class="help-block">Note for the alert</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_source">Source</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.source" id="opsgenie_source" placeholder="" />
+            <span class="help-block">Source of the alert</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_result">Link to Results</label>
+        <div class="controls">
+            <input type="checkbox" name="action.opsgenie_alert_action.param.result_link" id="opsgenie_result" placeholder="" value="1"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_search_query">Search Query</label>
+        <div class="controls">
+            <input type="checkbox" name="action.opsgenie_alert_action.param.search_query" id="opsgenie_search_query" placeholder="" value="1"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_alert_link">Alert Link</label>
+        <div class="controls">
+            <input type="checkbox" name="action.opsgenie_alert_action.param.alert_link" id="opsgenie_alert_link" placeholder="" value="1"/>
+        </div>
+    </div>
+</form>

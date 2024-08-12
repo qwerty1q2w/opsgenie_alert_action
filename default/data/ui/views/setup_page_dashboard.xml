@@ -1,0 +1,34 @@
+<dashboard isDashboard='false'
+           script='javascript/setup_page.js'
+           stylesheet='styles/setup_page.css'
+           hideTitle='true'
+           version='1.1'>
+    <row>
+        <panel>
+            <html>
+                <div id='main_container'>
+                    <h3>Opsgenie Alert Setup Page</h3>
+                    <div>
+                        <div class='text'>
+                            <span>Enter API key:</span>
+                            <input type='password' id='password_input'></input>
+                        </div>
+                        <div class='text'>
+                            <span>Please specify your region:</span>
+                            <select id='region_select'>
+                                <option value='us'>US</option>
+                                <option value='eu'>EU</option>
+                            </select>
+                        </div>
+                        <!-- Complete Setup button will call the completeSetup() function
+                             within javascript/setup_page.js -->
+                        <button id='setup_button'>Complete Setup</button>
+                        <div class='success'>API key saved successfully, redirecting to app...</div>
+                        <div class='error'>Issue encountered during setup, details below:</div>
+                        <code id='error_details'></code>
+                    </div>
+                </div>
+            </html>
+        </panel>
+    </row>
+</dashboard>
