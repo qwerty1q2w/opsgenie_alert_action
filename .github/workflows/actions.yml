@@ -13,7 +13,7 @@ on:
       - 'opsgenie_alert_action/**'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-20.04
 
     steps:
@@ -30,6 +30,22 @@ jobs:
 
     - name: Validate Opsgenie Alert Action
       run: slim validate opsgenie_alert_action
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: test
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install splunk-packaging-toolkit-1.0.1.tar.gz
 
     - name: Package Opsgenie Alert Action
       run: slim package opsgenie_alert_action
