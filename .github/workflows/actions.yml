@@ -70,3 +70,5 @@ jobs:
         asset_path: opsgenie_alert_action-${{ env.VERSION }}.tar.gz
         asset_name: opsgenie_alert_action-${{ env.VERSION }}.tar.gz
         asset_content_type: application/gzip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
