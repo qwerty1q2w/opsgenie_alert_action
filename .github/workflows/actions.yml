@@ -47,7 +47,9 @@ jobs:
     - name: Package Opsgenie Alert Action
       run: |
         slim package opsgenie_alert_action
-        mv opsgenie_alert_action.tar.gz opsgenie_alert_action-${{ env.VERSION }}.tar.gz
+        # Verify the package name and ensure it matches the pattern
+        PACKAGE_FILE=$(ls opsgenie_alert_action-${{ env.VERSION }}.tar.gz)
+        echo "Packaged file: $PACKAGE_FILE"
 
     - name: Create release
       uses: actions/create-release@v1
