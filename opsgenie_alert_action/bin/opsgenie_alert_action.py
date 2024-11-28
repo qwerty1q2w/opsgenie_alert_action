@@ -37,14 +37,16 @@ def get_api_key_and_region(sessionKey):
     return {'api_key': api_key, 'region': region}
 
 def send_alert(payload, api_key, region):
+    region_map = {
+        "eu": "https://api.eu.opsgenie.com/v2/alerts",
+        "us": "https://api.opsgenie.com/v2/alerts"
+    }
+
     region = region.lower()
-    if region == "eu":
-        url = "https://api.eu.opsgenie.com/v2/alerts"
-    elif region == "us":
-        url = "https://api.opsgenie.com/v2/alerts"
-    else:
+    if region not in region_map:
         raise ValueError("Invalid region specified. Only 'us' and 'eu' are supported.")
 
+    url = region_map[region]
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"GenieKey {api_key}"
@@ -67,7 +69,7 @@ def parse_responders(responders_str):
 
     return responders
 
-def main():
+def prepare_payload():
     payload = json.loads(sys.stdin.read())
     config = payload.get("configuration", {})
 
@@ -76,6 +78,7 @@ def main():
     message = config.get("search_name")
     description = config.get("message")
     priority = config.get("priority")
+    dynamic_priority = config.get("dynamic_priority")
     actions = config.get("actions", "").split(",")
     tags = config.get("tags", "").split(",")
     note = config.get("note", "")
@@ -86,6 +89,17 @@ def main():
     view_link = config.get('view_link')
     search = config.get('search')
     responders_str = config.get("responders", "")
+    alias_fields = config.get("alias", "")
+
+    if dynamic_priority == "1":
+        priority = payload.get("result", {}).get("opsgenie_priority", priority)
+
+    alias = None
+    if alias_fields:
+        alias_fields_list = alias_fields.split(",")
+        alias = ":".join(
+            payload.get("result", {}).get(field.strip(), "unknown") for field in alias_fields_list
+        )
 
     details = {}
     if result_link == "1":
@@ -110,10 +124,15 @@ def main():
         "entity": "Splunk",
         "responders": responders
     }
+    if alias:
+        opsgenie_payload["alias"] = alias
+    return opsgenie_payload, session_key
 
+def main():
+    prepared_payload, session_key = prepare_payload()
     api_key = get_api_key_and_region(session_key)['api_key']
     region = get_api_key_and_region(session_key)['region']
-    response = send_alert(opsgenie_payload, api_key, region)
+    response = send_alert(prepared_payload, api_key, region)
 
 if __name__ == "__main__":
     main()

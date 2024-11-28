@@ -5,7 +5,7 @@
     "id": {
       "group": null,
       "name": "opsgenie_alert_action",
-      "version": "1.0.1"
+      "version": "1.0.2"
     },
     "author": [
       {

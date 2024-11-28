@@ -19,7 +19,13 @@
             <span class="help-block">Priority of the alert</span>
         </div>
     </div>
-     <div class="control-group">
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_dynamic_priority">Dynamic Priority</label>
+        <div class="controls">
+            <input type="checkbox" name="action.opsgenie_alert_action.param.dynamic_priority" id="opsgenie_dynamic_priority" placeholder="" value="1" />
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label" for="opsgenie_responders">Responders</label>
         <div class="controls">
             <input type="text" name="action.opsgenie_alert_action.param.responders" id="opsgenie_responers" placeholder="team:name:teamname,user:username:email" />
@@ -31,6 +37,13 @@
         <div class="controls">
             <input type="text" name="action.opsgenie_alert_action.param.actions" id="opsgenie_actions" placeholder="action1,action2" />
             <span class="help-block">Comma-separated list of actions</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="opsgenie_alias">Alias</label>
+        <div class="controls">
+            <input type="text" name="action.opsgenie_alert_action.param.alias" id="opsgenie_alias" placeholder="srcip,hostname" />
+            <span class="help-block">Comma-separated list of fields</span>
         </div>
     </div>
     <div class="control-group">
